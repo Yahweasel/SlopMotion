@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "@twurple/api": "^8.1.4",
+    "@twurple/auth": "^8.1.4",
+    "@twurple/chat": "^8.1.4",
+    "@twurple/easy-bot": "^8.1.4",
+    "finalhandler": "^2.1.0",
+    "obscenity": "^0.4.6",
+    "serve-static": "^2.2.0",
+    "ws": "^8.21.0"
+  }
+}

@@ -1,0 +1,17 @@
+{
+    "openai": {
+        "model": "qwen3.6-35b"
+    },
+
+    "prompt": "Write a program as an ES6 JavaScript module using a canvas. The goal of this program (unless stated otherwise in the prompt below) is to be visually interesting.\n\nYou have a global variable, `canvas`, available, an OffscreenCanvas. The canvas is @W@ pixels wide and @H@ pixels tall. DO NOT CREATE `canvas`. IT ALREADY EXISTS IN `globalThis.canvas`. You will need to use `getContext` to create a rendering context; you may create a `\"2d\"`, `\"webgl\"`, or `\"webgl2\"` context.\n\nYou can use `setTimeout`, `setInterval`, or `requestAnimationFrame` for timing. The DOM is *not available*. Do *not* try to access `document`. You may not import any other modules.\n\n@P@\n\nAfter the code, give a very brief description of the sort of program you made, using *exactly* this format, on a line of its own:\n\nDESCRIPTION: (Description here)",
+
+    "subprompts": [
+        "You may implement any program in any style you choose. Be creative.",
+        "2D game.",
+        "3D game.",
+        "2D virtual kinetic sculpture.",
+        "3D virtual kinetic sculpture.",
+        "2D simulation.",
+        "3D simulation."
+    ]
+}

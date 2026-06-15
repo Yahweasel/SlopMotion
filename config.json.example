@@ -1,0 +1,12 @@
+{
+    "openai": {
+        "host": "http://aibox.local:8000"
+    },
+
+    "twitch": {
+        "channel": "slopmotion",
+        "access_token": "...",
+        "refresh_token": "...",
+        "client_id": "..."
+    }
+}
