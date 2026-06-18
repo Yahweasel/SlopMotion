@@ -286,6 +286,8 @@ server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
         commands: [
             twitchBot.createBotCommand("ai", onai),
+            twitchBot.createBotCommand("AI", onai),
+            twitchBot.createBotCommand("Ai", onai),
             twitchBot.createBotCommand("load", onload)
         ]
     });
