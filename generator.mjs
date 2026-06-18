@@ -357,7 +357,8 @@ function display() {
     // We draw the first few from bottom up, because it's easier
     ctx.fillStyle = "#111";
     ctx.fillRect(col, y, colW, h - y);
-    up();
+    if (!offline)
+        up();
     drawMultiline({
         text: instructionsText,
         x: ~~(mid - instructionsText.maxW/2),
