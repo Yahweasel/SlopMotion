@@ -33,6 +33,9 @@ export let currentError = null;
 export const inQueue = [];
 export const outQueue = [];
 
+// Set to true while generating
+export let busy = false;
+
 export let inQueueChangeRes = null;
 let outQueueChangeRes = [];
 
@@ -78,8 +81,14 @@ function outQueuePush(program) {
         f();
 }
 
+// Get our saved list
+try {
+    goodGames = JSON.parse(localStorage.getItem("good-games"));
+} catch (ex) {}
+
 // Get our initial list
-{
+if (!goodGames || !goodGames.length) {
+    goodGames = [];
     const listPromise = new Promise(res => {
         sock.event.addEventListener("list", ev => res(ev), {once: true});
     });
@@ -511,12 +520,15 @@ setInterval(display, 1000/12);
 // And start generating
 (async () => {
     while (true) try {
+        busy = false;
+
         // Wait for there to be something to do
         while (!inQueue.length && outQueue.length >= 2) {
             const inQueuePromise = new Promise(res => inQueueChangeRes = res);
             const outQueuePromise = new Promise(res => outQueueChangeRes.push(res));
             await Promise.race([inQueuePromise, outQueuePromise]);
         }
+        busy = true;
 
         // Prepare the canvas
         const w = ~~(window.innerWidth);

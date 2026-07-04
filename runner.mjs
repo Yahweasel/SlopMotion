@@ -87,6 +87,11 @@ function loadGame(opts) {
                 c: "good",
                 id: program.id
             }) + "\n");
+            try {
+                localStorage.setItem("good-games", JSON.stringify(
+                    generator.goodGames.slice(-128)
+                ));
+            } catch (ex) {}
         }
         return err;
     });
@@ -94,9 +99,29 @@ function loadGame(opts) {
 }
 
 (async () => {
+    const startTime = performance.now();
+    const endTime = startTime + 60*60*1000;
+
     while (true) {
         if (currentTimeout)
             await currentTimeout;
+
+        // Consider reloading
+        if (performance.now() >= endTime) {
+            let canReload = !generator.busy;
+            if (generator.inQueue.length > 0)
+                canReload = false;
+            for (const prog of generator.outQueue) {
+                if (!prog.random) {
+                    canReload = false;
+                    break;
+                }
+            }
+            if (canReload) {
+                await new Promise(res => setTimeout(res, 1000));
+                document.location.reload();
+            }
+        }
 
         // Get a program to run
         let program = generator.outQueueShift();
